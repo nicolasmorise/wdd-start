@@ -4,3 +4,146 @@
 *:after {
   box-sizing: border-box;
 }
+
+
+html {
+  background-image: url("/images/site/small_check.jpg");
+  background-size: cover;         
+  background-repeat: no-repeat;   
+  background-position: center;
+}
+
+body{
+  background-color: white;
+  background-size: 100%;
+  width: 75%;
+  margin-left: 100px;
+  padding: 20px;
+  border: 5px solid #ff6600;
+  border-radius: 10px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+nav{
+  background-color: rgb(27, 20, 58);
+  padding: 20px;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;  
+  flex-wrap: wrap;      
+  justify-content: space-between; 
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  list-style-type: none;
+  margin: 0 10px;
+  color: antiquewhite;
+  font-size: 30px;
+}
+
+
+#top-header{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: normal;
+}
+
+.siteName{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 40px;
+}
+
+#tools{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  
+}
+.hero{
+  position: relative;
+  padding: 20px;
+}
+.phrase{
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  top: 50%;
+  left: 10%;
+}
+
+.container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 20px;
+}
+.upgrades{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+}
+.space{
+  background-color: rgb(23, 130, 218);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  border: 5px solid slategray;
+  
+}
+
+.space img{
+  max-width: 100%;
+  height: auto;
+}
+
+.reviews{
+  text-align: justify;
+}
+
+.reviews h2{
+  font-size: 32px;
+}
+
+.reviews li{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px){
+  body{
+    width: 100%;
+    border: 0;
+    border-radius: 0%;
+  }
+  .phrase{
+    top: 0;
+    left: 0;
+  }
+  .container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+}
