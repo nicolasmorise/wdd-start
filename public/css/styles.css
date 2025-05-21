@@ -129,6 +129,58 @@ nav li {
   margin-bottom: 20px;
 }
 
+/* Inventory Display Grid */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 1000px; /* Limit the full width to help with centering */
+  justify-items: center; /* This ensures grid items are centered in their columns */
+}
+
+/* Each vehicle item */
+#inv-display li {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+#inv-display li:hover {
+  transform: scale(1.02);
+}
+
+/* Image of the vehicle */
+#inv-display img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Name and price container */
+.namePrice {
+  padding: 1rem;
+  text-align: center;
+}
+
+.namePrice h2 {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.namePrice span {
+  font-size: 1.2rem;
+  color: #2e8b57;
+  font-weight: bold;
+}
+
+
 @media (max-width: 600px){
   body{
     width: 100%;
