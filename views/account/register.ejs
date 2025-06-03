@@ -1,0 +1,69 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <h1><%= title %></h1>
+
+    <%- messages() %>
+
+    <form action="/account/register" method="post">
+      <div>
+        <label for="first_name">First name</label>
+        <input 
+          type="text" 
+          name="account_firstname" 
+          id="first_name" 
+          required 
+          value="<%= locals.account_firstname %>">
+      </div>
+
+      <div>
+        <label for="last_name">Last name</label>
+        <input 
+          type="text" 
+          name="account_lastname" 
+          id="last_name" 
+          required 
+          value="<%= locals.account_lastname %>">
+      </div>
+
+      <div>
+        <label for="email">Email address</label>
+        <input 
+          type="email" 
+          name="account_email" 
+          id="email" 
+          required 
+          placeholder= "Enter a valid email address"
+          value="<%= locals.account_email %>">
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          name="account_password" 
+          id="password" 
+          required 
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+          title="Password must be at least 12 characters long and include at least one uppercase letter, one number, and one special character.">
+        <br>
+        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
+
+        <div>
+          <input type="checkbox" id="showPassword" onclick="togglePassword()">
+          <label for="showPassword">Show Password</label>
+        </div>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="/account/login">Login here</a></p>
+  </div>
+</div>
+
+<script>
+  function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+  }
+</script>

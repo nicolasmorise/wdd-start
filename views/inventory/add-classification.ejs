@@ -1,0 +1,33 @@
+<div class="add-classification-wrapper">
+  <div class="add-classification-container">
+    <h1><%= title %></h1>
+
+
+    <%- messages() %>
+
+    <% if (message && message.length > 0) { %>
+    <ul class="notice">
+        <% message.forEach(msg => { %>
+        <li><%= msg %></li>
+        <% }) %>
+    </ul>
+    <% } %>
+
+
+    <form action="/inv/add-classification" method="post">
+      <div>
+        <label for="classification_name">Classification Name</label>
+        <span>Name Must Be Alphabetic Character Only</span>
+        <input 
+          type="text" 
+          name="classification_name" 
+          id="classification_name" 
+          required 
+          pattern="^[A-Za-z]+$"
+          value="<%= locals.classification_name %>">
+      </div>
+
+      <button type="submit">Add Classification</button>
+    </form>
+  </div>
+</div>
