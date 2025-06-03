@@ -1,11 +1,20 @@
 <div class="add-classification-wrapper">
   <div class="add-classification-container">        
-        <h1>Add Vehicle</h1>
+    <h1>Add Vehicle</h1>
 
-        <!-- Flash messages -->
-        <%- messages() %>
+    <%- messages() %>
+
+    <% if (errors && errors.length > 0) { %>
+        <div class="flash-message">
+            <% errors.forEach(error => { %>
+            <p><%= error.msg %></p>
+            <% }) %>
+        </div>
+    <% } %>
+
 
         <form action="/inv/add-inventory" method="post" id="addInventoryForm">
+            
 
             <label for="classificationList">Classification</label>
             <%- classificationList %>

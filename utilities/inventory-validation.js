@@ -76,24 +76,28 @@ validate.checkInventoryData = async (req, res, next) => {
 
   let errors = validationResult(req)
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav()
-    res.render("inventory/add-inventory", {
-      title: "Add Inventory",
-      nav,
-      errors,
-      inv_make,
-      inv_model,
-      inv_year,
-      inv_description,
-      inv_image,
-      inv_thumbnail,
-      inv_price,
-      inv_miles,
-      inv_color,
-      classification_id
-    })
-    return
-  }
+  let nav = await utilities.getNav();
+  let classificationList = await utilities.buildClassificationList(classification_id);
+
+  res.render("inventory/add-inventory", {
+    title: "Add Inventory",
+    nav,
+    errors: errors.array(),  
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+    classificationList, 
+  });
+  return;
+}
+
   next()
 }
 
