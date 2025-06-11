@@ -1,0 +1,27 @@
+<div class="account-management-wrapper">
+  <%- messages() %>
+
+  <% if (errors && errors.length > 0) { %>
+    <ul class="errors">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <h2>Welcome <%= accountData.account_firstname %></h2>
+
+  <div class="account-actions">
+    <!-- Update Account Link (visible to all roles) -->
+    <p>
+      <a href="/account/update/<%= accountData.account_id %>" class="account-link">Update Account Information</a>
+    </p>
+
+    <% if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
+      <h3>Inventory Management</h3>
+      <p>
+        <a href="/inv" class="account-link">Access Inventory Management</a>
+      </p>
+    <% } %>
+  </div>
+</div>

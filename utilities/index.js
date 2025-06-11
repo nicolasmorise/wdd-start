@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 
 
@@ -112,5 +114,73 @@ Util.buildClassificationList = async function (classification_id = null) {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+ if (req.cookies.jwt) {
+  jwt.verify(
+   req.cookies.jwt,
+   process.env.ACCESS_TOKEN_SECRET,
+   function (err, accountData) {
+    if (err) {
+     req.flash("Please log in")
+     res.clearCookie("jwt")
+     return res.redirect("/account/login")
+    }
+    res.locals.accountData = accountData
+    res.locals.loggedin = 1
+    next()
+   })
+ } else {
+  next()
+ }
+}
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
+ /* ****************************************
+* Middleware to check Employee/Admin access
+**************************************** */
+Util.checkEmployeeOrAdmin = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("error", "Session expired. Please log in again.")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+
+        // Check account type
+        if (accountData.account_type !== "Employee" && accountData.account_type !== "Admin") {
+          req.flash("error", "You must be an Employee or Admin to access this page.")
+          return res.redirect("/account/login")
+        }
+
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      }
+    )
+  } else {
+    req.flash("error", "Please log in to access this page.")
+    res.redirect("/account/login")
+  }
+}
 
 module.exports = Util

@@ -17,12 +17,16 @@ const errorRoute = require('./routes/errorRoute')
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
-
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * Middleware
  * ************************/
- app.use(session({
+// Cookie parser must come before session and any middleware that uses cookies
+app.use(cookieParser())
+
+// Session configuration
+app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
     pool,
@@ -33,23 +37,28 @@ const bodyParser = require("body-parser")
   name: 'sessionId',
 }))
 
-// Express Messages Middleware
+// Body parsers
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// Flash messages
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+// Custom middleware - must come after cookieParser
+const accountController = require('./controllers/accountController');
+app.use(accountController.checkLoginStatus);
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
  *************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
-app.set("layout", "./layouts/layout") // not at views root
-
+app.set("layout", "./layouts/layout")
 
 /* ***********************
  * Routes
@@ -64,9 +73,8 @@ app.use("/inv", inventoryRoute)
 
 app.use('/error', errorRoute)
 
-//Account routes
+// Account routes
 app.use("/account", require("./routes/accountRoute"))
-
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
@@ -88,7 +96,6 @@ app.use(async (err, req, res, next) => {
   })
 })
 
-
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
@@ -96,11 +103,9 @@ app.use(async (err, req, res, next) => {
 const port = process.env.PORT
 const host = process.env.HOST
 
-
 /* ***********************
  * Log statement to confirm server operation
  *************************/
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
-

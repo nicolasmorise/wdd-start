@@ -60,7 +60,7 @@ const accountModel = require("../models/account-model")
       // firstname is required and must be string
       body("account_email")
         .trim()
-        .escape()
+
         .notEmpty()
         .isLength({ min: 1 })
         .withMessage("Please provide a email."), // on error this message is sent.
@@ -98,25 +98,23 @@ validate.checkRegData = async (req, res, next) => {
 }
 
   /* ******************************
- * Check data and return errors or continue to registration
+ * Check data and return errors or continue to login
  * ***************************** */
 validate.checkLogData = async (req, res, next) => {
-  const {account_email} = req.body
-  let errors = []
-  errors = validationResult(req)
+  const { account_email } = req.body
+  let errors = validationResult(req)
+
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
-    res.render("account/login", {
+    return res.render("account/login", {
       errors,
       title: "Login",
       nav,
-      account_firstname,
-      account_lastname,
       account_email,
     })
-    return
   }
   next()
 }
+
 
 module.exports = validate

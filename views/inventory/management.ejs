@@ -4,4 +4,15 @@
         <li><a href="/inv/add-classification">Add New Classification</a></li>
         <li><a href="/inv/add-inventory">Add New Inventory</a></li>
     </ul>
+
+    <h2>Manage Inventory</h2>
+    <%- classificationSelect %>
+
+    <noscript>JavaScript must be enabled to use this page.</noscript>
+
+    
+    <!-- 🔧 Add this missing container -->
+    <div id="inventoryDisplay"></div>
+
+    <script src="/js/inventory.js" defer></script>
 </div>

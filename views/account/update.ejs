@@ -1,0 +1,43 @@
+<div class="account-update-wrapper">
+  <div class="account-update-container">
+    <h1>Update Account</h1>
+
+    <% if (message) { %>
+      <div class="flash-message"><%= message %></div>
+    <% } %>
+
+    <!-- Account Info Form -->
+    <form action="/account/update" method="POST" class="account-form">
+      <h2>Account Information</h2>
+      
+      <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+      
+      <label for="account_firstname">First Name:</label>
+      <input type="text" id="account_firstname" name="account_firstname" 
+             value="<%= accountData.account_firstname %>" required>
+      
+      <label for="account_lastname">Last Name:</label>
+      <input type="text" id="account_lastname" name="account_lastname" 
+             value="<%= accountData.account_lastname %>" required>
+      
+      <label for="account_email">Email:</label>
+      <input type="email" id="account_email" name="account_email" 
+             value="<%= accountData.account_email %>" required>
+      
+      <button type="submit">Update Account</button>
+    </form>
+
+    <!-- Password Form -->
+    <form action="/account/update-password" method="POST" class="account-form">
+      <h2>Change Password</h2>
+      
+      <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+      
+      <label for="account_password">New Password:</label>
+      <input type="password" id="account_password" name="account_password" required>
+      <small>Must be at least 12 characters with uppercase, lowercase, number, and special character.</small>
+      
+      <button type="submit">Change Password</button>
+    </form>
+  </div>
+</div>

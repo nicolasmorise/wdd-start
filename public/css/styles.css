@@ -339,27 +339,6 @@ button:hover {
   margin: 0.5rem 0;
 }
 
-.management-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 1rem;
-  background-color: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.management-nav li a {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
-}
-
-.management-nav  li a:hover {
-  text-decoration: underline;
-}
-
 /* Add Classification Page Styles */
 .add-classification-wrapper {
   display: flex;
@@ -469,7 +448,281 @@ button:hover {
   background-color: #e6ffe6;
 }
 
+.edit-classification-container {
+  background-color: white;
+  border: 5px solid #ff6600;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
 
+.edit-classification-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full height of the viewport */
+  padding: 1rem;      /* Fallback for very small screens */
+}
+
+.management-nav {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Navigation list */
+.management-nav ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.management-nav ul li a {
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: bold;
+}
+
+.management-nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Spacing for dropdown and heading */
+.management-nav h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.management-nav select {
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 400px;
+  font-size: 1rem;
+}
+
+/* Inventory Display Table Styling */
+#inventoryDisplay {
+  margin-top: 2rem;
+}
+
+#inventoryDisplay table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+
+#inventoryDisplay a {
+  display: inline-block;
+  margin: 0 0.50rem;
+  padding: 0.70rem;
+}
+
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+#inventoryDisplay thead {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+#inventoryDisplay tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+#inventoryDisplay a {
+  color: #fff;
+  background-color: #0077cc;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+#inventoryDisplay a:hover {
+  background-color: #005fa3;
+}
+
+/* Account Update Styles */
+.account-update-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+.account-update-container {
+  background-color: white;
+  border: 5px solid #ff6600;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.account-form h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ff6600;
+}
+
+.account-form label {
+  font-weight: bold;
+  color: #333;
+}
+
+.account-form input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.account-form small {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: -0.5rem;
+}
+
+.account-form button {
+  background-color: rgb(27, 20, 58);
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.account-form button:hover {
+  background-color: rgb(40, 32, 90);
+}
+
+/* Account Management View Styles */
+.account-management-wrapper {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border: 5px solid #ff6600;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+}
+
+.errors {
+  background-color: #ffe0e0;
+  color: #a00;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #f99;
+  font-size: 0.95rem;
+  list-style-type: none;
+}
+
+.errors li {
+  margin: 0.5rem 0;
+}
+
+.account-management-wrapper h2 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ff6600;
+}
+
+.account-management-wrapper p {
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+}
+
+.account-management-wrapper a {
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.account-management-wrapper a:hover {
+  text-decoration: underline;
+  background-color: #f0f0f0;
+}
+
+.account-management-wrapper h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .account-management-wrapper {
+    padding: 1rem;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+  }
+  
+  .account-management-wrapper h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-management-wrapper {
+    padding: 0.5rem;
+  }
+  
+  .account-management-wrapper h2 {
+    font-size: 1.3rem;
+  }
+  
+  .account-management-wrapper p,
+  .account-management-wrapper a {
+    font-size: 1rem;
+  }
+}
 
 @media (max-width: 600px){
   body{
@@ -511,3 +764,4 @@ button:hover {
     box-shadow: none;
   }
 }
+
