@@ -1,0 +1,46 @@
+<div class="appointments-view">
+
+  <% if (messages.success) { %>
+    <div class="flash-message success"><%= messages.success %></div>
+  <% } %>
+
+  <% if (messages.error) { %>
+    <div class="flash-message error"><%= messages.error %></div>
+  <% } %>
+
+  <% if (appointments.length === 0) { %>
+    <p class="no-appointments">No appointments found.</p>
+  <% } %>
+
+  <h2>All Appointments</h2>
+  <table>
+    <tr>
+      <th>Appointment ID</th>
+      <th>Customer</th>
+      <th>Vehicle</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Change Status</th>
+    </tr>
+    <% appointments.forEach(appt => { %>
+      <tr>
+        <td><%= appt.appointment_id %></td>
+        <td><%= appt.first_name %> <%= appt.last_name %></td>
+        <td><%= appt.inv_year %> <%= appt.inv_make %> <%= appt.inv_model %></td>
+        <td><%= new Date(appt.date).toLocaleString() %></td>
+        <td><%= appt.status %></td>
+        <td>
+          <form method="post" action="/appointments/update-status">
+            <input type="hidden" name="appointment_id" value="<%= appt.appointment_id %>">
+            <select name="status">
+              <option value="pending" <%= appt.status === "pending" ? "selected" : "" %>>Pending</option>
+              <option value="approved" <%= appt.status === "approved" ? "selected" : "" %>>Approved</option>
+              <option value="cancelled" <%= appt.status === "cancelled" ? "selected" : "" %>>Cancelled</option>
+            </select>
+            <button type="submit">Update</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+</div>

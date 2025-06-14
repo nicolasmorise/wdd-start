@@ -93,6 +93,9 @@ async function registerAccount(req, res) {
   }
 }
 
+/* ****************************************
+*  Process Login
+* *************************************** */
 async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
@@ -125,9 +128,13 @@ async function accountLogin(req, res) {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
       
+
       // Set res.locals for use in views
       res.locals.loggedin = true
       res.locals.accountData = accountDataForToken
+      req.session.accountId = accountData.account_id
+      console.log("Logged in Account ID:", req.session.accountId)
+      console.log("Account Data:", accountData)
       
       return res.redirect("/account")
     } else {

@@ -63,12 +63,12 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
-Util.buildVehicleDetail = function (data) {
+Util.buildVehicleDetail = function (data, flashMessages = {}) {
   let detail = ''
 
   if (data) {
     detail += '<section class="vehicle-detail">'
-    detail += `<img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" class="vehicle-img" />`
+    detail += `<img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model}" class="vehicle-img" />`
     detail += '<div class="vehicle-info">'
     detail += `<h2>$${new Intl.NumberFormat('en-US').format(data.inv_price)}</h2>`
     detail += `<p>${data.inv_description}</p>`
@@ -78,14 +78,34 @@ Util.buildVehicleDetail = function (data) {
     detail += `<li><strong>Year:</strong> ${data.inv_year}</li>`
     detail += `<li><strong>Miles:</strong> ${new Intl.NumberFormat('en-US').format(data.inv_miles)}</li>`
     detail += '</ul>'
-    detail += '</div>'
-    detail += '</section>'
-  } else {
-    detail += '<p class="notice">Sorry, that vehicle could not be found.</p>'
+
+    // Flash messages
+    if (flashMessages.success) {
+      detail += `<div class="flash success">${flashMessages.success}</div>`
+    }
+    if (flashMessages.error) {
+      detail += `<div class="flash error">${flashMessages.error}</div>`
+    }
+
+    // Booking form
+    if (data.sessionLoggedIn) {
+      detail += `
+        <form class="appointment-form" action="/appointments/book/${data.inv_id}" method="post">
+          <label for="date">Choose Date & Time:</label>
+          <input type="datetime-local" id="date" name="date" required>
+          <button type="submit">Book Appointment</button>
+        </form>
+      `
+    } else {
+      detail += `<p><a href="/account/login">Log in</a> to book an appointment.</p>`
+    }
+
+    detail += '</div></section>'
   }
 
   return detail
 }
+
 
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications()
@@ -149,7 +169,7 @@ Util.checkJWTToken = (req, res, next) => {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
- }
+}
 
  /* ****************************************
 * Middleware to check Employee/Admin access

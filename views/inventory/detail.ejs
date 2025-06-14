@@ -1,4 +1,20 @@
 <main>
   <h1><%= title %></h1>
+
+  <%- messages() %>
+
   <%- detail %>
+
+  <section class="appointment-form">
+    <h3>Book a Test Drive</h3>
+
+  <form action="/appointments/book/<%= inv_id %>" method="POST">
+    <label for="date">Select date and time:</label>
+    <input type="datetime-local" id="date" name="date" required step="1800">
+    <button type="submit">Book Appointment</button>
+  </form>
+
+
+  </section>
+
 </main>

@@ -23,5 +23,9 @@
         <a href="/inv" class="account-link">Access Inventory Management</a>
       </p>
     <% } %>
+
+    <% if (accountData.account_type === 'Admin' || accountData.account_type === 'Employee') { %>
+      <a href="/appointments">View Appointments (Admin)</a>
+    <% } %>
   </div>
 </div>

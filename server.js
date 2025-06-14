@@ -18,6 +18,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const appointmentRoutes = require("./routes/appointmentRoute")
 
 /* ***********************
  * Middleware
@@ -48,6 +49,12 @@ app.use(function(req, res, next){
   next()
 })
 
+// ✅ This sets the `loggedin` variable for views and middleware
+app.use((req, res, next) => {
+  res.locals.loggedin = !!req.session.accountId
+  next()
+})
+
 // Custom middleware - must come after cookieParser
 const accountController = require('./controllers/accountController');
 app.use(accountController.checkLoginStatus);
@@ -75,6 +82,9 @@ app.use('/error', errorRoute)
 
 // Account routes
 app.use("/account", require("./routes/accountRoute"))
+
+// Appointment routes
+app.use("/appointments", appointmentRoutes)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

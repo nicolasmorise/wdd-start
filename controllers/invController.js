@@ -28,12 +28,19 @@ invCont.buildDetailView = async function (req, res, next) {
   const item = await invModel.getInventoryById(inv_id)
   const nav = await utilities.getNav()
   const title = `${item.inv_year} ${item.inv_make} ${item.inv_model}`
-  const detail = utilities.buildVehicleDetail(item)
+
+  // Add sessionLoggedIn flag and pass inv_id to build detail
+  const detail = utilities.buildVehicleDetail({
+    ...item,
+    sessionLoggedIn: Boolean(req.session.accountId),
+    inv_id
+  })
 
   res.render("./inventory/detail", {
     title,
     nav,
-    detail
+    detail,
+    inv_id
   })
 }
 
